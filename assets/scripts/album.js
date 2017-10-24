@@ -30,8 +30,8 @@ var albumMarconi = {
 };
 
 // My new album
-var album3 = {
-  title: 'dd',
+var albumAwesome = {
+  title: 'The Awesomest',
   artist: 'Larry Awesomest',
   label: 'FA',
   year: '2010',
@@ -80,7 +80,7 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
   setCurrentAlbum(albumPicasso);
-  var albums = [albumPicasso, albumMarconi, album3];
+  var albums = [albumPicasso, albumMarconi, albumAwesome];
   index = 1;
   albumImage.addEventListener("click", function(event) {
     setCurrentAlbum(albums[index]);
