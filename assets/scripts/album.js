@@ -29,21 +29,6 @@ var albumMarconi = {
   ]
 };
 
-// My new album
-var albumAwesome = {
-  title: 'The Awesomest',
-  artist: 'Larry Awesomest',
-  label: 'FA',
-  year: '2010',
-  albumArtUrl: 'assets/images/album_covers/16.png',
-  songs: [
-      { title: 'The beginning', duration: '1:01' },
-      { title: 'Penut Butter', duration: '5:01' },
-      { title: 'Jelly', duration: '3:14' },
-      { title: 'The end', duration: '2:15'}
-  ]
-};
-
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
      '<tr class="album-view-song-item">'
@@ -55,14 +40,14 @@ var createSongRow = function(songNumber, songName, songLength) {
   return template;
 };
 
-// #1 - creating variables for all the HTML elements we need to manipulate
-var albumTitle = document.getElementsByClassName('album-view-title')[0];
-var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-var albumImage = document.getElementsByClassName('album-cover-art')[0];
-var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
-
 var setCurrentAlbum = function(album) {
+  // #1 - creating variables for all the HTML elements we need to manipulate
+  var albumTitle = document.getElementsByClassName('album-view-title')[0];
+  var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+  var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+  var albumImage = document.getElementsByClassName('album-cover-art')[0];
+  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
   // #2 - injecting content
   albumTitle.firstChild.nodeValue = album.title;
   albumArtist.firstChild.nodeValue = album.artist;
@@ -80,13 +65,4 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
   setCurrentAlbum(albumPicasso);
-  var albums = [albumPicasso, albumMarconi, albumAwesome];
-  index = 1;
-  albumImage.addEventListener("click", function(event) {
-    setCurrentAlbum(albums[index]);
-    index++;
-    if(index == albums.length) {
-      index = 0;
-    }
-  });
 };
