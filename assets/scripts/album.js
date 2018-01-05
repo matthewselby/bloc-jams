@@ -37,29 +37,34 @@ var createSongRow = function(songNumber, songName, songLength) {
    + '  <td class="song-item-duration">' + songLength + '</td>'
    + '</tr>'
    ;
-  return template;
+  return $(template);
 };
 
 var setCurrentAlbum = function(album) {
-  // #1 - creating variables for all the HTML elements we need to manipulate
-  var albumTitle = document.getElementsByClassName('album-view-title')[0];
-  var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-  var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-  var albumImage = document.getElementsByClassName('album-cover-art')[0];
-  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+  // #1
+  // creating variables for all the DOM we need to manipulate
+  var $albumTitle = $('.album-view-title');
+  var $albumArtist = $('.album-view-artist');
+  var $albumReleaseInfo = $('.album-view-release-info');
+  var $albumImage = $('.album-cover-art');
+  var $albumSongList = $('.album-view-song-list');
 
-  // #2 - injecting content
-  albumTitle.firstChild.nodeValue = album.title;
-  albumArtist.firstChild.nodeValue = album.artist;
-  albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
-  albumImage.setAttribute('src', album.albumArtUrl);
+  // #2
+  // injecting content
+  $albumTitle.text(album.title);
+  $albumArtist.text(album.artist);
+  $albumReleaseInfo.text(album.year + ' ' + album.label);
+  $albumImage.attr('src', album.albumArtUrl);
 
-  // #3 - resetting the album song list HTML to ensure that nothing is there to interfere with us adding content
-  albumSongList.innerHTML = '';
+  // #3
+  // removing all content in albumSongList - starting fresh
+  $albumSongList.empty();
 
-  // #4 - feeding our createSongRow function from our albumSongList object
+  // #4
+  // adding song rows with conetnet from songs object in this album to albumSongList - adding album songs to DOM
   for (var i = 0; i < album.songs.length; i++) {
-      albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+      var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+      $albumSongList.append($newRow);
   }
 };
 
@@ -142,3 +147,4 @@ window.onload = function() {
   });
   }
 };
+
